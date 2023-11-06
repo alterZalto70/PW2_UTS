@@ -1,22 +1,83 @@
 <?php
 // A
-$harga_barang = array(
-    array("Minyak Telon", 30000),
-    array("Diapers", 51000),
-    array("Baby Oil", 16000),
-    array("Shampo Baby", 20000),
-    array("Bedak", 15000),
-    array("Baju Bayi", 35500),
-    array("Jumper", 50000)
-);
 
-$total_jumlah = 0;
-foreach ($harga_barang as $barang) {
-    $total_jumlah += $barang[1];
+$products = [
+    [
+        'id' => 1,
+        'product' => 'Minyak Telon',
+        'price' => 30000,
+        'stock' => 20,
+        'total' => 600000,
+    ],
+    [
+        'id' => 2,
+        'product' => 'Diapers',
+        'price' => 51000,
+        'stock' => 15,
+        'total' => 765000,
+    ],
+    [
+        'id' => 3,
+        'product' => 'Baby Oil',
+        'price' => 16000,
+        'stock' => 10,
+        'total' => 160000,
+    ],
+    [
+        'id' => 4,
+        'product' => 'Shampo Baby',
+        'price' => 20000,
+        'stock' => 5,
+        'total' => 100000,
+    ],
+    [
+        'id' => 5,
+        'product' => 'Bedak',
+        'price' => 15000,
+        'stock' => 18,
+        'total' => 270000,
+    ],
+    [
+        'id' => 6,
+        'product' => 'Baju Bayi',
+        'price' => 35500,
+        'stock' => 20,
+        'total' => 710000,
+    ],
+    [
+        'id' => 7,
+        'product' => 'Jumper',
+        'price' => 50000,
+        'stock' => 25,
+        'total' => 1250000,
+    ],
+];
+
+echo '<table>';
+echo '<thead>';
+echo '<tr>';
+echo '<th>ID</th>';
+echo '<th>Produk</th>';
+echo '<th>Harga</th>';
+echo '<th>Stok</th>';
+echo '<th>Jumlah</th>';
+echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
+
+foreach ($products as $product) {
+    echo '<tr>';
+    echo '<td>' . $product['id'] . '</td>';
+    echo '<td>' . $product['product'] . '</td>';
+    echo '<td>' . $product['price'] . '</td>';
+    echo '<td>' . $product['stock'] . '</td>';
+    echo '<td>' . $product['total'] . '</td>';
+    echo '</tr>';
 }
 
-echo "Total jumlah: ".$total_jumlah;
-echo"<br> </br>";
+echo '</tbody>';
+echo '</table>';
+
 echo "================================= </br>";
 ?>
 
@@ -53,24 +114,33 @@ echo "================================= </br>";
 
                 <?php
                 // C
-                $harga_barang = array(
-                    array("Produk", "Stok", "Harga"),
-                    array("Minyak Telon", 30, 30000),
-                    array("Diapers", 20, 51000),
-                    array("Baby Oil", 15, 16000),
-                    array("Shampo Baby", 18, 20000),
-                    array("Bedak", 15, 15000),
-                    array("Baju Bayi", 20, 35500),
-                    array("Jumper", 18, 50000)
+                $tabel_harga_barang = array(
+                    1 => array("Produk" => "Minyak Telon", "Stok" => 20, "Harga" => 30000, "Jumlah" => 0),
+                    2 => array("Produk" => "Diapers", "Stok" => 15, "Harga" => 51000, "Jumlah" => 0),
+                    3 => array("Produk" => "Baby Oil", "Stok" => 10, "Harga" => 16000, "Jumlah" => 0),
+                    4 => array("Produk" => "Shampo Baby", "Stok" => 18, "Harga" => 20000, "Jumlah" => 0),
+                    5 => array("Produk" => "Bedak", "Stok" => 15, "Harga" => 15000, "Jumlah" => 0),
+                    6 => array("Produk" => "Baju Bayi", "Stok" => 20, "Harga" => 35500, "Jumlah" => 0),
+                    7 => array("Produk" => "Jumper", "Stok" => 25, "Harga" => 50000, "Jumlah" => 0)
                 );
+                $total_jumlah = 0;
+                $total_pembelian = 0;
+                
+                foreach ($tabel_harga_barang as $key => $produk) {
+                    $tabel_harga_barang[$key]['Jumlah'] = $produk['Stok'] * $produk['Harga'];
+                    $total_jumlah += $produk['Jumlah'];
+                };
 
+                echo "<h2>Tabel Harga Barang</h2>";
                 echo "<table border='1'>";
-                foreach ($harga_barang as $barang) {
+                echo "<tr><th>ID</th><th>Produk</th><th>Stok</th><th>Harga</th><th>Jumlah</th></tr>";
+                foreach ($tabel_harga_barang as $key => $produk) {
                     echo "<tr>";
-                    foreach ($barang as $kolom) {
-                        echo "<td>".$kolom."</td>";
-                    }
+                    echo "<td>$key</td>";
+                    echo "<td>{$produk['Produk']}</td>";
+                    echo "<td>{$produk['Stok']}</td>";
+                    echo "<td>{$produk['Harga']}</td>";
+                    echo "<td>{$produk['Jumlah']}</td>";
                     echo "</tr>";
-                }
-                echo "</table>";
+                ;}
                 ?>
